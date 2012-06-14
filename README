@@ -1,0 +1,9 @@
+Wireless sensor nodes used for simple communication protocol testing
+
+Hardware:
+RFM70 communication module
+ATmega8L
+DS18B20 one wire temperature sensor (for the hell of it)
+generic 3.3-2.7V low drop voltage regulator
+
+
