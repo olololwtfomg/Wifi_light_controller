@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1340386478 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\main.c
+	<avr/io.h>
+	"initialization.h"
+	"USART.h"
+
+1340302553 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\initialization.h
+
+1340037089 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\protocol_low.c
+
+1340273325 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\initialization.c
+	<avr/io.h>
+	"spi.h"
+	"rfm70.h"
+	"USART.h"
+	"initialization.h"
+
+1340197088 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\spi.h
+	<inttypes.h>
+
+1340198887 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\spi.c
+	<avr/io.h>
+	<inttypes.h>
+	"spi.h"
+	"bitops.h"
+
+1340194028 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\bitops.h
+
+1340197953 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\rfm70.c
+	"rfm70.h"
+	"spi.h"
+
+1339166808 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\rfm70.h
+
+1340385455 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.h
+	<inttypes.h>
+
+1340223584 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.c
+	<avr/io.h>
+	<inttypes.h>
+

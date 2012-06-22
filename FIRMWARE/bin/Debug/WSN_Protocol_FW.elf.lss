@@ -1,0 +1,141 @@
+
+bin\Debug\WSN_Protocol_FW.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000092  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000060  00000000  00000000  000000e6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000062  00000000  00000000  00000146  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000121  00000000  00000000  000001a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000a8  00000000  00000000  000002c9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000015d  00000000  00000000  00000371  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000060  00000000  00000000  000004d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000b8  00000000  00000000  00000530  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	19 c0       	rjmp	.+50     	; 0x36 <__bad_interrupt>
+   4:	18 c0       	rjmp	.+48     	; 0x36 <__bad_interrupt>
+   6:	17 c0       	rjmp	.+46     	; 0x36 <__bad_interrupt>
+   8:	16 c0       	rjmp	.+44     	; 0x36 <__bad_interrupt>
+   a:	15 c0       	rjmp	.+42     	; 0x36 <__bad_interrupt>
+   c:	14 c0       	rjmp	.+40     	; 0x36 <__bad_interrupt>
+   e:	13 c0       	rjmp	.+38     	; 0x36 <__bad_interrupt>
+  10:	12 c0       	rjmp	.+36     	; 0x36 <__bad_interrupt>
+  12:	11 c0       	rjmp	.+34     	; 0x36 <__bad_interrupt>
+  14:	10 c0       	rjmp	.+32     	; 0x36 <__bad_interrupt>
+  16:	0f c0       	rjmp	.+30     	; 0x36 <__bad_interrupt>
+  18:	0e c0       	rjmp	.+28     	; 0x36 <__bad_interrupt>
+  1a:	0d c0       	rjmp	.+26     	; 0x36 <__bad_interrupt>
+  1c:	0c c0       	rjmp	.+24     	; 0x36 <__bad_interrupt>
+  1e:	0b c0       	rjmp	.+22     	; 0x36 <__bad_interrupt>
+  20:	0a c0       	rjmp	.+20     	; 0x36 <__bad_interrupt>
+  22:	09 c0       	rjmp	.+18     	; 0x36 <__bad_interrupt>
+  24:	08 c0       	rjmp	.+16     	; 0x36 <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+  32:	02 d0       	rcall	.+4      	; 0x38 <main>
+  34:	2c c0       	rjmp	.+88     	; 0x8e <_exit>
+
+00000036 <__bad_interrupt>:
+  36:	e4 cf       	rjmp	.-56     	; 0x0 <__vectors>
+
+00000038 <main>:
+
+#include <avr/io.h>
+#include "initialization.h"
+
+int main(void)
+{
+  38:	df 93       	push	r29
+  3a:	cf 93       	push	r28
+  3c:	cd b7       	in	r28, 0x3d	; 61
+  3e:	de b7       	in	r29, 0x3e	; 62
+    //initializations
+    init_periph();
+  40:	1e d0       	rcall	.+60     	; 0x7e <init_periph>
+  42:	ff cf       	rjmp	.-2      	; 0x42 <__SREG__+0x3>
+
+00000044 <SPI_MasterInit>:
+#include <avr/io.h>
+#include "spi.h"
+
+void SPI_MasterInit(void)
+{
+  44:	df 93       	push	r29
+  46:	cf 93       	push	r28
+  48:	cd b7       	in	r28, 0x3d	; 61
+  4a:	de b7       	in	r29, 0x3e	; 62
+   DDRB |= (1<<DDB3)|(1<<DDB4)|(1<<DDB5);
+  4c:	a7 e3       	ldi	r26, 0x37	; 55
+  4e:	b0 e0       	ldi	r27, 0x00	; 0
+  50:	e7 e3       	ldi	r30, 0x37	; 55
+  52:	f0 e0       	ldi	r31, 0x00	; 0
+  54:	80 81       	ld	r24, Z
+  56:	88 63       	ori	r24, 0x38	; 56
+  58:	8c 93       	st	X, r24
+   PORTB |= (1<<PINB4);
+  5a:	a8 e3       	ldi	r26, 0x38	; 56
+  5c:	b0 e0       	ldi	r27, 0x00	; 0
+  5e:	e8 e3       	ldi	r30, 0x38	; 56
+  60:	f0 e0       	ldi	r31, 0x00	; 0
+  62:	80 81       	ld	r24, Z
+  64:	80 61       	ori	r24, 0x10	; 16
+  66:	8c 93       	st	X, r24
+   //SPCR = 0b01010001;
+#if SPI_INTERRUPT_ENABLED==1
+   SPCR = (1<<SPIE)|(1<<SPE)|(1<<MSTR);
+#else
+    SPCR = (1<<SPE)|(1<<MSTR);
+  68:	ed e2       	ldi	r30, 0x2D	; 45
+  6a:	f0 e0       	ldi	r31, 0x00	; 0
+  6c:	80 e5       	ldi	r24, 0x50	; 80
+  6e:	80 83       	st	Z, r24
+#endif
+   SPSR = (1<<SPI2X); //DOUBLE SPEED WOOHOO
+  70:	ee e2       	ldi	r30, 0x2E	; 46
+  72:	f0 e0       	ldi	r31, 0x00	; 0
+  74:	81 e0       	ldi	r24, 0x01	; 1
+  76:	80 83       	st	Z, r24
+}
+  78:	cf 91       	pop	r28
+  7a:	df 91       	pop	r29
+  7c:	08 95       	ret
+
+0000007e <init_periph>:
+#include "spi.h"
+
+void init_periph()
+{
+  7e:	df 93       	push	r29
+  80:	cf 93       	push	r28
+  82:	cd b7       	in	r28, 0x3d	; 61
+  84:	de b7       	in	r29, 0x3e	; 62
+    SPI_MasterInit();
+  86:	de df       	rcall	.-68     	; 0x44 <SPI_MasterInit>
+}
+  88:	cf 91       	pop	r28
+  8a:	df 91       	pop	r29
+  8c:	08 95       	ret
+
+0000008e <_exit>:
+  8e:	f8 94       	cli
+
+00000090 <__stop_program>:
+  90:	ff cf       	rjmp	.-2      	; 0x90 <__stop_program>

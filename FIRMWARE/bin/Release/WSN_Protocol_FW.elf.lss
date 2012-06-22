@@ -1,0 +1,1013 @@
+
+bin\Release\WSN_Protocol_FW.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000006e8  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000072  00800060  000006e8  0000075c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
+   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
+   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
+   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
+   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
+  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
+  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
+  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
+  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
+  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
+  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
+  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
+  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
+  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
+  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
+  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e8 ee       	ldi	r30, 0xE8	; 232
+  3a:	f6 e0       	ldi	r31, 0x06	; 6
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+  42:	a2 3d       	cpi	r26, 0xD2	; 210
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <.do_copy_data_loop>
+  48:	19 d0       	rcall	.+50     	; 0x7c <main>
+  4a:	4c c3       	rjmp	.+1688   	; 0x6e4 <_exit>
+
+0000004c <__bad_interrupt>:
+  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+
+0000004e <init_periph>:
+  4e:	08 95       	ret
+
+00000050 <init_io>:
+  50:	87 b3       	in	r24, 0x17	; 23
+  52:	88 63       	ori	r24, 0x38	; 56
+  54:	87 bb       	out	0x17, r24	; 23
+  56:	c4 9a       	sbi	0x18, 4	; 24
+  58:	81 b3       	in	r24, 0x11	; 17
+  5a:	89 61       	ori	r24, 0x19	; 25
+  5c:	81 bb       	out	0x11, r24	; 17
+  5e:	82 b3       	in	r24, 0x12	; 18
+  60:	86 60       	ori	r24, 0x06	; 6
+  62:	82 bb       	out	0x12, r24	; 18
+  64:	84 b3       	in	r24, 0x14	; 20
+  66:	88 63       	ori	r24, 0x38	; 56
+  68:	84 bb       	out	0x14, r24	; 20
+  6a:	85 b3       	in	r24, 0x15	; 21
+  6c:	8c 63       	ori	r24, 0x3C	; 60
+  6e:	85 bb       	out	0x15, r24	; 21
+  70:	08 95       	ret
+
+00000072 <init_all>:
+  72:	ee df       	rcall	.-36     	; 0x50 <init_io>
+  74:	8c e0       	ldi	r24, 0x0C	; 12
+  76:	90 e0       	ldi	r25, 0x00	; 0
+  78:	1a d3       	rcall	.+1588   	; 0x6ae <USART_init>
+  7a:	08 95       	ret
+
+0000007c <main>:
+  7c:	e8 df       	rcall	.-48     	; 0x4e <init_periph>
+  7e:	f9 df       	rcall	.-14     	; 0x72 <init_all>
+  80:	80 e6       	ldi	r24, 0x60	; 96
+  82:	90 e0       	ldi	r25, 0x00	; 0
+  84:	1f d3       	rcall	.+1598   	; 0x6c4 <debug_send>
+  86:	ff cf       	rjmp	.-2      	; 0x86 <main+0xa>
+
+00000088 <rfm70_buffer_write>:
+  88:	ef 92       	push	r14
+  8a:	ff 92       	push	r15
+  8c:	0f 93       	push	r16
+  8e:	1f 93       	push	r17
+  90:	cf 93       	push	r28
+  92:	df 93       	push	r29
+  94:	18 2f       	mov	r17, r24
+  96:	f6 2e       	mov	r15, r22
+  98:	e7 2e       	mov	r14, r23
+  9a:	04 2f       	mov	r16, r20
+  9c:	80 32       	cpi	r24, 0x20	; 32
+  9e:	0c f4       	brge	.+2      	; 0xa2 <rfm70_buffer_write+0x1a>
+  a0:	10 62       	ori	r17, 0x20	; 32
+  a2:	80 e0       	ldi	r24, 0x00	; 0
+  a4:	eb d2       	rcall	.+1494   	; 0x67c <RFM70_CSN>
+  a6:	81 2f       	mov	r24, r17
+  a8:	e4 d2       	rcall	.+1480   	; 0x672 <SPI_RW>
+  aa:	00 23       	and	r16, r16
+  ac:	51 f0       	breq	.+20     	; 0xc2 <rfm70_buffer_write+0x3a>
+  ae:	8f 2d       	mov	r24, r15
+  b0:	9e 2d       	mov	r25, r14
+  b2:	9c 01       	movw	r18, r24
+  b4:	e9 01       	movw	r28, r18
+  b6:	89 91       	ld	r24, Y+
+  b8:	dc d2       	rcall	.+1464   	; 0x672 <SPI_RW>
+  ba:	9e 01       	movw	r18, r28
+  bc:	2f 19       	sub	r18, r15
+  be:	20 17       	cp	r18, r16
+  c0:	d0 f3       	brcs	.-12     	; 0xb6 <rfm70_buffer_write+0x2e>
+  c2:	81 e0       	ldi	r24, 0x01	; 1
+  c4:	db d2       	rcall	.+1462   	; 0x67c <RFM70_CSN>
+  c6:	df 91       	pop	r29
+  c8:	cf 91       	pop	r28
+  ca:	1f 91       	pop	r17
+  cc:	0f 91       	pop	r16
+  ce:	ff 90       	pop	r15
+  d0:	ef 90       	pop	r14
+  d2:	08 95       	ret
+
+000000d4 <rfm70_transmit_message_once>:
+  d4:	9c 01       	movw	r18, r24
+  d6:	46 2f       	mov	r20, r22
+  d8:	61 32       	cpi	r22, 0x21	; 33
+  da:	08 f0       	brcs	.+2      	; 0xde <rfm70_transmit_message_once+0xa>
+  dc:	40 e2       	ldi	r20, 0x20	; 32
+  de:	80 eb       	ldi	r24, 0xB0	; 176
+  e0:	b9 01       	movw	r22, r18
+  e2:	d2 df       	rcall	.-92     	; 0x88 <rfm70_buffer_write>
+  e4:	08 95       	ret
+
+000000e6 <rfm70_transmit_message>:
+  e6:	9c 01       	movw	r18, r24
+  e8:	46 2f       	mov	r20, r22
+  ea:	61 32       	cpi	r22, 0x21	; 33
+  ec:	08 f0       	brcs	.+2      	; 0xf0 <rfm70_transmit_message+0xa>
+  ee:	40 e2       	ldi	r20, 0x20	; 32
+  f0:	80 ea       	ldi	r24, 0xA0	; 160
+  f2:	b9 01       	movw	r22, r18
+  f4:	c9 df       	rcall	.-110    	; 0x88 <rfm70_buffer_write>
+  f6:	08 95       	ret
+
+000000f8 <rfm70_transmit_address>:
+  f8:	bc 01       	movw	r22, r24
+  fa:	80 e1       	ldi	r24, 0x10	; 16
+  fc:	45 e0       	ldi	r20, 0x05	; 5
+  fe:	c4 df       	rcall	.-120    	; 0x88 <rfm70_buffer_write>
+ 100:	08 95       	ret
+
+00000102 <rfm70_receive_address_p1>:
+ 102:	bc 01       	movw	r22, r24
+ 104:	8b e0       	ldi	r24, 0x0B	; 11
+ 106:	45 e0       	ldi	r20, 0x05	; 5
+ 108:	bf df       	rcall	.-130    	; 0x88 <rfm70_buffer_write>
+ 10a:	08 95       	ret
+
+0000010c <rfm70_receive_address_p0>:
+ 10c:	bc 01       	movw	r22, r24
+ 10e:	8a e0       	ldi	r24, 0x0A	; 10
+ 110:	45 e0       	ldi	r20, 0x05	; 5
+ 112:	ba df       	rcall	.-140    	; 0x88 <rfm70_buffer_write>
+ 114:	08 95       	ret
+
+00000116 <rfm70_buffer_read>:
+ 116:	ef 92       	push	r14
+ 118:	ff 92       	push	r15
+ 11a:	0f 93       	push	r16
+ 11c:	1f 93       	push	r17
+ 11e:	cf 93       	push	r28
+ 120:	df 93       	push	r29
+ 122:	18 2f       	mov	r17, r24
+ 124:	f6 2e       	mov	r15, r22
+ 126:	e7 2e       	mov	r14, r23
+ 128:	04 2f       	mov	r16, r20
+ 12a:	80 e0       	ldi	r24, 0x00	; 0
+ 12c:	a7 d2       	rcall	.+1358   	; 0x67c <RFM70_CSN>
+ 12e:	81 2f       	mov	r24, r17
+ 130:	a0 d2       	rcall	.+1344   	; 0x672 <SPI_RW>
+ 132:	00 23       	and	r16, r16
+ 134:	59 f0       	breq	.+22     	; 0x14c <rfm70_buffer_read+0x36>
+ 136:	8f 2d       	mov	r24, r15
+ 138:	9e 2d       	mov	r25, r14
+ 13a:	9c 01       	movw	r18, r24
+ 13c:	e9 01       	movw	r28, r18
+ 13e:	80 e0       	ldi	r24, 0x00	; 0
+ 140:	98 d2       	rcall	.+1328   	; 0x672 <SPI_RW>
+ 142:	89 93       	st	Y+, r24
+ 144:	9e 01       	movw	r18, r28
+ 146:	2f 19       	sub	r18, r15
+ 148:	20 17       	cp	r18, r16
+ 14a:	c8 f3       	brcs	.-14     	; 0x13e <rfm70_buffer_read+0x28>
+ 14c:	81 e0       	ldi	r24, 0x01	; 1
+ 14e:	96 d2       	rcall	.+1324   	; 0x67c <RFM70_CSN>
+ 150:	df 91       	pop	r29
+ 152:	cf 91       	pop	r28
+ 154:	1f 91       	pop	r17
+ 156:	0f 91       	pop	r16
+ 158:	ff 90       	pop	r15
+ 15a:	ef 90       	pop	r14
+ 15c:	08 95       	ret
+
+0000015e <rfm70_register_read>:
+ 15e:	1f 93       	push	r17
+ 160:	18 2f       	mov	r17, r24
+ 162:	80 e0       	ldi	r24, 0x00	; 0
+ 164:	8b d2       	rcall	.+1302   	; 0x67c <RFM70_CSN>
+ 166:	81 2f       	mov	r24, r17
+ 168:	84 d2       	rcall	.+1288   	; 0x672 <SPI_RW>
+ 16a:	80 e0       	ldi	r24, 0x00	; 0
+ 16c:	82 d2       	rcall	.+1284   	; 0x672 <SPI_RW>
+ 16e:	18 2f       	mov	r17, r24
+ 170:	81 e0       	ldi	r24, 0x01	; 1
+ 172:	84 d2       	rcall	.+1288   	; 0x67c <RFM70_CSN>
+ 174:	81 2f       	mov	r24, r17
+ 176:	1f 91       	pop	r17
+ 178:	08 95       	ret
+
+0000017a <rfm70_receive_next_length>:
+ 17a:	80 e6       	ldi	r24, 0x60	; 96
+ 17c:	f0 df       	rcall	.-32     	; 0x15e <rfm70_register_read>
+ 17e:	08 95       	ret
+
+00000180 <rfm70_receive_next_pipe>:
+ 180:	87 e0       	ldi	r24, 0x07	; 7
+ 182:	ed df       	rcall	.-38     	; 0x15e <rfm70_register_read>
+ 184:	86 95       	lsr	r24
+ 186:	87 70       	andi	r24, 0x07	; 7
+ 188:	08 95       	ret
+
+0000018a <rfm70_receive>:
+ 18a:	ef 92       	push	r14
+ 18c:	ff 92       	push	r15
+ 18e:	0f 93       	push	r16
+ 190:	1f 93       	push	r17
+ 192:	cf 93       	push	r28
+ 194:	df 93       	push	r29
+ 196:	ec 01       	movw	r28, r24
+ 198:	7b 01       	movw	r14, r22
+ 19a:	8a 01       	movw	r16, r20
+ 19c:	f1 df       	rcall	.-30     	; 0x180 <rfm70_receive_next_pipe>
+ 19e:	87 30       	cpi	r24, 0x07	; 7
+ 1a0:	81 f0       	breq	.+32     	; 0x1c2 <rfm70_receive+0x38>
+ 1a2:	88 83       	st	Y, r24
+ 1a4:	ea df       	rcall	.-44     	; 0x17a <rfm70_receive_next_length>
+ 1a6:	48 2f       	mov	r20, r24
+ 1a8:	f8 01       	movw	r30, r16
+ 1aa:	80 83       	st	Z, r24
+ 1ac:	81 e6       	ldi	r24, 0x61	; 97
+ 1ae:	b7 01       	movw	r22, r14
+ 1b0:	b2 df       	rcall	.-156    	; 0x116 <rfm70_buffer_read>
+ 1b2:	81 e0       	ldi	r24, 0x01	; 1
+ 1b4:	df 91       	pop	r29
+ 1b6:	cf 91       	pop	r28
+ 1b8:	1f 91       	pop	r17
+ 1ba:	0f 91       	pop	r16
+ 1bc:	ff 90       	pop	r15
+ 1be:	ef 90       	pop	r14
+ 1c0:	08 95       	ret
+ 1c2:	80 e0       	ldi	r24, 0x00	; 0
+ 1c4:	df 91       	pop	r29
+ 1c6:	cf 91       	pop	r28
+ 1c8:	1f 91       	pop	r17
+ 1ca:	0f 91       	pop	r16
+ 1cc:	ff 90       	pop	r15
+ 1ce:	ef 90       	pop	r14
+ 1d0:	08 95       	ret
+
+000001d2 <rfm70_lost_packets_count>:
+ 1d2:	88 e0       	ldi	r24, 0x08	; 8
+ 1d4:	c4 df       	rcall	.-120    	; 0x15e <rfm70_register_read>
+ 1d6:	82 95       	swap	r24
+ 1d8:	8f 70       	andi	r24, 0x0F	; 15
+ 1da:	08 95       	ret
+
+000001dc <rfm70_retransmit_count>:
+ 1dc:	88 e0       	ldi	r24, 0x08	; 8
+ 1de:	bf df       	rcall	.-130    	; 0x15e <rfm70_register_read>
+ 1e0:	8f 70       	andi	r24, 0x0F	; 15
+ 1e2:	08 95       	ret
+
+000001e4 <rfm70_receive_fifo_empty>:
+ 1e4:	87 e1       	ldi	r24, 0x17	; 23
+ 1e6:	bb df       	rcall	.-138    	; 0x15e <rfm70_register_read>
+ 1e8:	81 70       	andi	r24, 0x01	; 1
+ 1ea:	08 95       	ret
+
+000001ec <rfm70_transmit_fifo_full>:
+ 1ec:	87 e1       	ldi	r24, 0x17	; 23
+ 1ee:	b7 df       	rcall	.-146    	; 0x15e <rfm70_register_read>
+ 1f0:	90 e0       	ldi	r25, 0x00	; 0
+ 1f2:	96 95       	lsr	r25
+ 1f4:	87 95       	ror	r24
+ 1f6:	92 95       	swap	r25
+ 1f8:	82 95       	swap	r24
+ 1fa:	8f 70       	andi	r24, 0x0F	; 15
+ 1fc:	89 27       	eor	r24, r25
+ 1fe:	9f 70       	andi	r25, 0x0F	; 15
+ 200:	89 27       	eor	r24, r25
+ 202:	81 70       	andi	r24, 0x01	; 1
+ 204:	08 95       	ret
+
+00000206 <rfm70_register_write>:
+ 206:	0f 93       	push	r16
+ 208:	1f 93       	push	r17
+ 20a:	18 2f       	mov	r17, r24
+ 20c:	06 2f       	mov	r16, r22
+ 20e:	80 32       	cpi	r24, 0x20	; 32
+ 210:	08 f4       	brcc	.+2      	; 0x214 <rfm70_register_write+0xe>
+ 212:	10 62       	ori	r17, 0x20	; 32
+ 214:	80 e0       	ldi	r24, 0x00	; 0
+ 216:	32 d2       	rcall	.+1124   	; 0x67c <RFM70_CSN>
+ 218:	81 2f       	mov	r24, r17
+ 21a:	2b d2       	rcall	.+1110   	; 0x672 <SPI_RW>
+ 21c:	80 2f       	mov	r24, r16
+ 21e:	29 d2       	rcall	.+1106   	; 0x672 <SPI_RW>
+ 220:	81 e0       	ldi	r24, 0x01	; 1
+ 222:	2c d2       	rcall	.+1112   	; 0x67c <RFM70_CSN>
+ 224:	1f 91       	pop	r17
+ 226:	0f 91       	pop	r16
+ 228:	08 95       	ret
+
+0000022a <rfm70_channel_payload_size>:
+ 22a:	0f 93       	push	r16
+ 22c:	1f 93       	push	r17
+ 22e:	08 2f       	mov	r16, r24
+ 230:	16 2f       	mov	r17, r22
+ 232:	61 32       	cpi	r22, 0x21	; 33
+ 234:	80 f4       	brcc	.+32     	; 0x256 <rfm70_channel_payload_size+0x2c>
+ 236:	8c e1       	ldi	r24, 0x1C	; 28
+ 238:	92 df       	rcall	.-220    	; 0x15e <rfm70_register_read>
+ 23a:	28 2f       	mov	r18, r24
+ 23c:	11 23       	and	r17, r17
+ 23e:	79 f4       	brne	.+30     	; 0x25e <rfm70_channel_payload_size+0x34>
+ 240:	81 e0       	ldi	r24, 0x01	; 1
+ 242:	90 e0       	ldi	r25, 0x00	; 0
+ 244:	00 2e       	mov	r0, r16
+ 246:	02 c0       	rjmp	.+4      	; 0x24c <rfm70_channel_payload_size+0x22>
+ 248:	88 0f       	add	r24, r24
+ 24a:	99 1f       	adc	r25, r25
+ 24c:	0a 94       	dec	r0
+ 24e:	e2 f7       	brpl	.-8      	; 0x248 <rfm70_channel_payload_size+0x1e>
+ 250:	62 2f       	mov	r22, r18
+ 252:	68 2b       	or	r22, r24
+ 254:	0f c0       	rjmp	.+30     	; 0x274 <rfm70_channel_payload_size+0x4a>
+ 256:	8c e1       	ldi	r24, 0x1C	; 28
+ 258:	82 df       	rcall	.-252    	; 0x15e <rfm70_register_read>
+ 25a:	28 2f       	mov	r18, r24
+ 25c:	10 e2       	ldi	r17, 0x20	; 32
+ 25e:	81 e0       	ldi	r24, 0x01	; 1
+ 260:	90 e0       	ldi	r25, 0x00	; 0
+ 262:	00 2e       	mov	r0, r16
+ 264:	02 c0       	rjmp	.+4      	; 0x26a <rfm70_channel_payload_size+0x40>
+ 266:	88 0f       	add	r24, r24
+ 268:	99 1f       	adc	r25, r25
+ 26a:	0a 94       	dec	r0
+ 26c:	e2 f7       	brpl	.-8      	; 0x266 <rfm70_channel_payload_size+0x3c>
+ 26e:	68 2f       	mov	r22, r24
+ 270:	60 95       	com	r22
+ 272:	62 23       	and	r22, r18
+ 274:	8c e1       	ldi	r24, 0x1C	; 28
+ 276:	c7 df       	rcall	.-114    	; 0x206 <rfm70_register_write>
+ 278:	80 2f       	mov	r24, r16
+ 27a:	8f 5e       	subi	r24, 0xEF	; 239
+ 27c:	61 2f       	mov	r22, r17
+ 27e:	c3 df       	rcall	.-122    	; 0x206 <rfm70_register_write>
+ 280:	1f 91       	pop	r17
+ 282:	0f 91       	pop	r16
+ 284:	08 95       	ret
+
+00000286 <rfm70_power>:
+ 286:	1f 93       	push	r17
+ 288:	18 2f       	mov	r17, r24
+ 28a:	80 e0       	ldi	r24, 0x00	; 0
+ 28c:	fd d1       	rcall	.+1018   	; 0x688 <RFM70_CE>
+ 28e:	86 e0       	ldi	r24, 0x06	; 6
+ 290:	66 df       	rcall	.-308    	; 0x15e <rfm70_register_read>
+ 292:	68 2f       	mov	r22, r24
+ 294:	69 70       	andi	r22, 0x09	; 9
+ 296:	14 30       	cpi	r17, 0x04	; 4
+ 298:	08 f0       	brcs	.+2      	; 0x29c <rfm70_power+0x16>
+ 29a:	13 e0       	ldi	r17, 0x03	; 3
+ 29c:	11 0f       	add	r17, r17
+ 29e:	60 63       	ori	r22, 0x30	; 48
+ 2a0:	61 2b       	or	r22, r17
+ 2a2:	86 e0       	ldi	r24, 0x06	; 6
+ 2a4:	b0 df       	rcall	.-160    	; 0x206 <rfm70_register_write>
+ 2a6:	81 e0       	ldi	r24, 0x01	; 1
+ 2a8:	ef d1       	rcall	.+990    	; 0x688 <RFM70_CE>
+ 2aa:	1f 91       	pop	r17
+ 2ac:	08 95       	ret
+
+000002ae <rfm70_lna_low>:
+ 2ae:	86 e0       	ldi	r24, 0x06	; 6
+ 2b0:	56 df       	rcall	.-340    	; 0x15e <rfm70_register_read>
+ 2b2:	68 2f       	mov	r22, r24
+ 2b4:	6e 7f       	andi	r22, 0xFE	; 254
+ 2b6:	86 e0       	ldi	r24, 0x06	; 6
+ 2b8:	a6 df       	rcall	.-180    	; 0x206 <rfm70_register_write>
+ 2ba:	08 95       	ret
+
+000002bc <rfm70_lna_high>:
+ 2bc:	86 e0       	ldi	r24, 0x06	; 6
+ 2be:	4f df       	rcall	.-354    	; 0x15e <rfm70_register_read>
+ 2c0:	68 2f       	mov	r22, r24
+ 2c2:	61 60       	ori	r22, 0x01	; 1
+ 2c4:	86 e0       	ldi	r24, 0x06	; 6
+ 2c6:	9f df       	rcall	.-194    	; 0x206 <rfm70_register_write>
+ 2c8:	08 95       	ret
+
+000002ca <rfm70_retransmit_delay_attempts>:
+ 2ca:	96 2f       	mov	r25, r22
+ 2cc:	68 2f       	mov	r22, r24
+ 2ce:	62 95       	swap	r22
+ 2d0:	60 7f       	andi	r22, 0xF0	; 240
+ 2d2:	9f 70       	andi	r25, 0x0F	; 15
+ 2d4:	69 2b       	or	r22, r25
+ 2d6:	84 e0       	ldi	r24, 0x04	; 4
+ 2d8:	96 df       	rcall	.-212    	; 0x206 <rfm70_register_write>
+ 2da:	08 95       	ret
+
+000002dc <rfm70_lost_packets_reset>:
+ 2dc:	85 e0       	ldi	r24, 0x05	; 5
+ 2de:	3f df       	rcall	.-386    	; 0x15e <rfm70_register_read>
+ 2e0:	68 2f       	mov	r22, r24
+ 2e2:	85 e0       	ldi	r24, 0x05	; 5
+ 2e4:	90 df       	rcall	.-224    	; 0x206 <rfm70_register_write>
+ 2e6:	08 95       	ret
+
+000002e8 <rfm70_pipe_enable>:
+ 2e8:	0f 93       	push	r16
+ 2ea:	1f 93       	push	r17
+ 2ec:	18 2f       	mov	r17, r24
+ 2ee:	06 2f       	mov	r16, r22
+ 2f0:	82 e0       	ldi	r24, 0x02	; 2
+ 2f2:	35 df       	rcall	.-406    	; 0x15e <rfm70_register_read>
+ 2f4:	28 2f       	mov	r18, r24
+ 2f6:	16 30       	cpi	r17, 0x06	; 6
+ 2f8:	08 f0       	brcs	.+2      	; 0x2fc <rfm70_pipe_enable+0x14>
+ 2fa:	15 e0       	ldi	r17, 0x05	; 5
+ 2fc:	00 23       	and	r16, r16
+ 2fe:	79 f4       	brne	.+30     	; 0x31e <rfm70_pipe_enable+0x36>
+ 300:	81 e0       	ldi	r24, 0x01	; 1
+ 302:	90 e0       	ldi	r25, 0x00	; 0
+ 304:	02 c0       	rjmp	.+4      	; 0x30a <rfm70_pipe_enable+0x22>
+ 306:	88 0f       	add	r24, r24
+ 308:	99 1f       	adc	r25, r25
+ 30a:	1a 95       	dec	r17
+ 30c:	e2 f7       	brpl	.-8      	; 0x306 <rfm70_pipe_enable+0x1e>
+ 30e:	68 2f       	mov	r22, r24
+ 310:	60 95       	com	r22
+ 312:	62 23       	and	r22, r18
+ 314:	82 e0       	ldi	r24, 0x02	; 2
+ 316:	77 df       	rcall	.-274    	; 0x206 <rfm70_register_write>
+ 318:	1f 91       	pop	r17
+ 31a:	0f 91       	pop	r16
+ 31c:	08 95       	ret
+ 31e:	81 e0       	ldi	r24, 0x01	; 1
+ 320:	90 e0       	ldi	r25, 0x00	; 0
+ 322:	02 c0       	rjmp	.+4      	; 0x328 <rfm70_pipe_enable+0x40>
+ 324:	88 0f       	add	r24, r24
+ 326:	99 1f       	adc	r25, r25
+ 328:	1a 95       	dec	r17
+ 32a:	e2 f7       	brpl	.-8      	; 0x324 <rfm70_pipe_enable+0x3c>
+ 32c:	62 2f       	mov	r22, r18
+ 32e:	68 2b       	or	r22, r24
+ 330:	82 e0       	ldi	r24, 0x02	; 2
+ 332:	69 df       	rcall	.-302    	; 0x206 <rfm70_register_write>
+ 334:	1f 91       	pop	r17
+ 336:	0f 91       	pop	r16
+ 338:	08 95       	ret
+
+0000033a <rfm70_pipe_autoack>:
+ 33a:	0f 93       	push	r16
+ 33c:	1f 93       	push	r17
+ 33e:	18 2f       	mov	r17, r24
+ 340:	06 2f       	mov	r16, r22
+ 342:	81 e0       	ldi	r24, 0x01	; 1
+ 344:	0c df       	rcall	.-488    	; 0x15e <rfm70_register_read>
+ 346:	28 2f       	mov	r18, r24
+ 348:	16 30       	cpi	r17, 0x06	; 6
+ 34a:	08 f0       	brcs	.+2      	; 0x34e <rfm70_pipe_autoack+0x14>
+ 34c:	15 e0       	ldi	r17, 0x05	; 5
+ 34e:	00 23       	and	r16, r16
+ 350:	79 f4       	brne	.+30     	; 0x370 <rfm70_pipe_autoack+0x36>
+ 352:	81 e0       	ldi	r24, 0x01	; 1
+ 354:	90 e0       	ldi	r25, 0x00	; 0
+ 356:	02 c0       	rjmp	.+4      	; 0x35c <rfm70_pipe_autoack+0x22>
+ 358:	88 0f       	add	r24, r24
+ 35a:	99 1f       	adc	r25, r25
+ 35c:	1a 95       	dec	r17
+ 35e:	e2 f7       	brpl	.-8      	; 0x358 <rfm70_pipe_autoack+0x1e>
+ 360:	68 2f       	mov	r22, r24
+ 362:	60 95       	com	r22
+ 364:	62 23       	and	r22, r18
+ 366:	81 e0       	ldi	r24, 0x01	; 1
+ 368:	4e df       	rcall	.-356    	; 0x206 <rfm70_register_write>
+ 36a:	1f 91       	pop	r17
+ 36c:	0f 91       	pop	r16
+ 36e:	08 95       	ret
+ 370:	81 e0       	ldi	r24, 0x01	; 1
+ 372:	90 e0       	ldi	r25, 0x00	; 0
+ 374:	02 c0       	rjmp	.+4      	; 0x37a <rfm70_pipe_autoack+0x40>
+ 376:	88 0f       	add	r24, r24
+ 378:	99 1f       	adc	r25, r25
+ 37a:	1a 95       	dec	r17
+ 37c:	e2 f7       	brpl	.-8      	; 0x376 <rfm70_pipe_autoack+0x3c>
+ 37e:	62 2f       	mov	r22, r18
+ 380:	68 2b       	or	r22, r24
+ 382:	81 e0       	ldi	r24, 0x01	; 1
+ 384:	40 df       	rcall	.-384    	; 0x206 <rfm70_register_write>
+ 386:	1f 91       	pop	r17
+ 388:	0f 91       	pop	r16
+ 38a:	08 95       	ret
+
+0000038c <rfm70_receive_address_pn>:
+ 38c:	86 5f       	subi	r24, 0xF6	; 246
+ 38e:	3b df       	rcall	.-394    	; 0x206 <rfm70_register_write>
+ 390:	08 95       	ret
+
+00000392 <rfm70_address_length>:
+ 392:	86 30       	cpi	r24, 0x06	; 6
+ 394:	30 f0       	brcs	.+12     	; 0x3a2 <rfm70_address_length+0x10>
+ 396:	85 e0       	ldi	r24, 0x05	; 5
+ 398:	68 2f       	mov	r22, r24
+ 39a:	62 50       	subi	r22, 0x02	; 2
+ 39c:	83 e0       	ldi	r24, 0x03	; 3
+ 39e:	33 df       	rcall	.-410    	; 0x206 <rfm70_register_write>
+ 3a0:	08 95       	ret
+ 3a2:	83 30       	cpi	r24, 0x03	; 3
+ 3a4:	c8 f7       	brcc	.-14     	; 0x398 <rfm70_address_length+0x6>
+ 3a6:	61 e0       	ldi	r22, 0x01	; 1
+ 3a8:	83 e0       	ldi	r24, 0x03	; 3
+ 3aa:	2d df       	rcall	.-422    	; 0x206 <rfm70_register_write>
+ 3ac:	08 95       	ret
+
+000003ae <rfm70_crc_length>:
+ 3ae:	0f 93       	push	r16
+ 3b0:	1f 93       	push	r17
+ 3b2:	08 2f       	mov	r16, r24
+ 3b4:	83 30       	cpi	r24, 0x03	; 3
+ 3b6:	78 f4       	brcc	.+30     	; 0x3d6 <rfm70_crc_length+0x28>
+ 3b8:	80 e0       	ldi	r24, 0x00	; 0
+ 3ba:	d1 de       	rcall	.-606    	; 0x15e <rfm70_register_read>
+ 3bc:	18 2f       	mov	r17, r24
+ 3be:	00 23       	and	r16, r16
+ 3c0:	69 f4       	brne	.+26     	; 0x3dc <rfm70_crc_length+0x2e>
+ 3c2:	81 e0       	ldi	r24, 0x01	; 1
+ 3c4:	60 e0       	ldi	r22, 0x00	; 0
+ 3c6:	1f df       	rcall	.-450    	; 0x206 <rfm70_register_write>
+ 3c8:	13 7f       	andi	r17, 0xF3	; 243
+ 3ca:	80 e0       	ldi	r24, 0x00	; 0
+ 3cc:	61 2f       	mov	r22, r17
+ 3ce:	1b df       	rcall	.-458    	; 0x206 <rfm70_register_write>
+ 3d0:	1f 91       	pop	r17
+ 3d2:	0f 91       	pop	r16
+ 3d4:	08 95       	ret
+ 3d6:	80 e0       	ldi	r24, 0x00	; 0
+ 3d8:	c2 de       	rcall	.-636    	; 0x15e <rfm70_register_read>
+ 3da:	18 2f       	mov	r17, r24
+ 3dc:	81 e0       	ldi	r24, 0x01	; 1
+ 3de:	6f e3       	ldi	r22, 0x3F	; 63
+ 3e0:	12 df       	rcall	.-476    	; 0x206 <rfm70_register_write>
+ 3e2:	61 2f       	mov	r22, r17
+ 3e4:	6b 7f       	andi	r22, 0xFB	; 251
+ 3e6:	62 30       	cpi	r22, 0x02	; 2
+ 3e8:	29 f0       	breq	.+10     	; 0x3f4 <rfm70_crc_length+0x46>
+ 3ea:	80 e0       	ldi	r24, 0x00	; 0
+ 3ec:	0c df       	rcall	.-488    	; 0x206 <rfm70_register_write>
+ 3ee:	1f 91       	pop	r17
+ 3f0:	0f 91       	pop	r16
+ 3f2:	08 95       	ret
+ 3f4:	66 e0       	ldi	r22, 0x06	; 6
+ 3f6:	f9 cf       	rjmp	.-14     	; 0x3ea <rfm70_crc_length+0x3c>
+
+000003f8 <rfm70_air_data_rate>:
+ 3f8:	1f 93       	push	r17
+ 3fa:	18 2f       	mov	r17, r24
+ 3fc:	80 e0       	ldi	r24, 0x00	; 0
+ 3fe:	44 d1       	rcall	.+648    	; 0x688 <RFM70_CE>
+ 400:	86 e0       	ldi	r24, 0x06	; 6
+ 402:	ad de       	rcall	.-678    	; 0x15e <rfm70_register_read>
+ 404:	68 2f       	mov	r22, r24
+ 406:	67 7f       	andi	r22, 0xF7	; 247
+ 408:	12 30       	cpi	r17, 0x02	; 2
+ 40a:	08 f0       	brcs	.+2      	; 0x40e <rfm70_air_data_rate+0x16>
+ 40c:	68 60       	ori	r22, 0x08	; 8
+ 40e:	86 e0       	ldi	r24, 0x06	; 6
+ 410:	fa de       	rcall	.-524    	; 0x206 <rfm70_register_write>
+ 412:	81 e0       	ldi	r24, 0x01	; 1
+ 414:	39 d1       	rcall	.+626    	; 0x688 <RFM70_CE>
+ 416:	1f 91       	pop	r17
+ 418:	08 95       	ret
+
+0000041a <rfm70_channel>:
+ 41a:	68 2f       	mov	r22, r24
+ 41c:	6e 77       	andi	r22, 0x7E	; 126
+ 41e:	85 e0       	ldi	r24, 0x05	; 5
+ 420:	f2 de       	rcall	.-540    	; 0x206 <rfm70_register_write>
+ 422:	08 95       	ret
+
+00000424 <rfm70_mode_powerdown>:
+ 424:	80 e0       	ldi	r24, 0x00	; 0
+ 426:	30 d1       	rcall	.+608    	; 0x688 <RFM70_CE>
+ 428:	80 e0       	ldi	r24, 0x00	; 0
+ 42a:	99 de       	rcall	.-718    	; 0x15e <rfm70_register_read>
+ 42c:	68 2f       	mov	r22, r24
+ 42e:	6d 7f       	andi	r22, 0xFD	; 253
+ 430:	80 e0       	ldi	r24, 0x00	; 0
+ 432:	e9 de       	rcall	.-558    	; 0x206 <rfm70_register_write>
+ 434:	08 95       	ret
+
+00000436 <rfm70_mode_standby>:
+ 436:	80 e0       	ldi	r24, 0x00	; 0
+ 438:	27 d1       	rcall	.+590    	; 0x688 <RFM70_CE>
+ 43a:	80 e0       	ldi	r24, 0x00	; 0
+ 43c:	90 de       	rcall	.-736    	; 0x15e <rfm70_register_read>
+ 43e:	68 2f       	mov	r22, r24
+ 440:	62 60       	ori	r22, 0x02	; 2
+ 442:	80 e0       	ldi	r24, 0x00	; 0
+ 444:	e0 de       	rcall	.-576    	; 0x206 <rfm70_register_write>
+ 446:	08 95       	ret
+
+00000448 <rfm70_mode_transmit>:
+ 448:	81 ee       	ldi	r24, 0xE1	; 225
+ 44a:	60 e0       	ldi	r22, 0x00	; 0
+ 44c:	dc de       	rcall	.-584    	; 0x206 <rfm70_register_write>
+ 44e:	87 e0       	ldi	r24, 0x07	; 7
+ 450:	86 de       	rcall	.-756    	; 0x15e <rfm70_register_read>
+ 452:	68 2f       	mov	r22, r24
+ 454:	87 e0       	ldi	r24, 0x07	; 7
+ 456:	d7 de       	rcall	.-594    	; 0x206 <rfm70_register_write>
+ 458:	80 e0       	ldi	r24, 0x00	; 0
+ 45a:	16 d1       	rcall	.+556    	; 0x688 <RFM70_CE>
+ 45c:	80 e0       	ldi	r24, 0x00	; 0
+ 45e:	7f de       	rcall	.-770    	; 0x15e <rfm70_register_read>
+ 460:	68 2f       	mov	r22, r24
+ 462:	6e 7f       	andi	r22, 0xFE	; 254
+ 464:	62 60       	ori	r22, 0x02	; 2
+ 466:	80 e0       	ldi	r24, 0x00	; 0
+ 468:	ce de       	rcall	.-612    	; 0x206 <rfm70_register_write>
+ 46a:	81 e0       	ldi	r24, 0x01	; 1
+ 46c:	0d d1       	rcall	.+538    	; 0x688 <RFM70_CE>
+ 46e:	08 95       	ret
+
+00000470 <rfm70_mode_receive>:
+ 470:	82 ee       	ldi	r24, 0xE2	; 226
+ 472:	60 e0       	ldi	r22, 0x00	; 0
+ 474:	c8 de       	rcall	.-624    	; 0x206 <rfm70_register_write>
+ 476:	87 e0       	ldi	r24, 0x07	; 7
+ 478:	72 de       	rcall	.-796    	; 0x15e <rfm70_register_read>
+ 47a:	68 2f       	mov	r22, r24
+ 47c:	87 e0       	ldi	r24, 0x07	; 7
+ 47e:	c3 de       	rcall	.-634    	; 0x206 <rfm70_register_write>
+ 480:	80 e0       	ldi	r24, 0x00	; 0
+ 482:	02 d1       	rcall	.+516    	; 0x688 <RFM70_CE>
+ 484:	80 e0       	ldi	r24, 0x00	; 0
+ 486:	6b de       	rcall	.-810    	; 0x15e <rfm70_register_read>
+ 488:	68 2f       	mov	r22, r24
+ 48a:	63 60       	ori	r22, 0x03	; 3
+ 48c:	80 e0       	ldi	r24, 0x00	; 0
+ 48e:	bb de       	rcall	.-650    	; 0x206 <rfm70_register_write>
+ 490:	81 e0       	ldi	r24, 0x01	; 1
+ 492:	fa d0       	rcall	.+500    	; 0x688 <RFM70_CE>
+ 494:	08 95       	ret
+
+00000496 <rfm70_is_present>:
+ 496:	0f 93       	push	r16
+ 498:	1f 93       	push	r17
+ 49a:	87 e0       	ldi	r24, 0x07	; 7
+ 49c:	60 de       	rcall	.-832    	; 0x15e <rfm70_register_read>
+ 49e:	08 2f       	mov	r16, r24
+ 4a0:	80 e5       	ldi	r24, 0x50	; 80
+ 4a2:	63 e5       	ldi	r22, 0x53	; 83
+ 4a4:	b0 de       	rcall	.-672    	; 0x206 <rfm70_register_write>
+ 4a6:	87 e0       	ldi	r24, 0x07	; 7
+ 4a8:	5a de       	rcall	.-844    	; 0x15e <rfm70_register_read>
+ 4aa:	18 2f       	mov	r17, r24
+ 4ac:	80 e5       	ldi	r24, 0x50	; 80
+ 4ae:	63 e5       	ldi	r22, 0x53	; 83
+ 4b0:	aa de       	rcall	.-684    	; 0x206 <rfm70_register_write>
+ 4b2:	80 e0       	ldi	r24, 0x00	; 0
+ 4b4:	10 27       	eor	r17, r16
+ 4b6:	10 38       	cpi	r17, 0x80	; 128
+ 4b8:	19 f0       	breq	.+6      	; 0x4c0 <rfm70_is_present+0x2a>
+ 4ba:	1f 91       	pop	r17
+ 4bc:	0f 91       	pop	r16
+ 4be:	08 95       	ret
+ 4c0:	81 e0       	ldi	r24, 0x01	; 1
+ 4c2:	1f 91       	pop	r17
+ 4c4:	0f 91       	pop	r16
+ 4c6:	08 95       	ret
+
+000004c8 <rfm70_bank>:
+ 4c8:	1f 93       	push	r17
+ 4ca:	18 2f       	mov	r17, r24
+ 4cc:	87 e0       	ldi	r24, 0x07	; 7
+ 4ce:	47 de       	rcall	.-882    	; 0x15e <rfm70_register_read>
+ 4d0:	87 fd       	sbrc	r24, 7
+ 4d2:	07 c0       	rjmp	.+14     	; 0x4e2 <rfm70_bank+0x1a>
+ 4d4:	11 23       	and	r17, r17
+ 4d6:	19 f0       	breq	.+6      	; 0x4de <rfm70_bank+0x16>
+ 4d8:	80 e5       	ldi	r24, 0x50	; 80
+ 4da:	63 e5       	ldi	r22, 0x53	; 83
+ 4dc:	94 de       	rcall	.-728    	; 0x206 <rfm70_register_write>
+ 4de:	1f 91       	pop	r17
+ 4e0:	08 95       	ret
+ 4e2:	11 23       	and	r17, r17
+ 4e4:	e1 f7       	brne	.-8      	; 0x4de <rfm70_bank+0x16>
+ 4e6:	80 e5       	ldi	r24, 0x50	; 80
+ 4e8:	63 e5       	ldi	r22, 0x53	; 83
+ 4ea:	8d de       	rcall	.-742    	; 0x206 <rfm70_register_write>
+ 4ec:	f8 cf       	rjmp	.-16     	; 0x4de <rfm70_bank+0x16>
+
+000004ee <rfm70_init_bank1>:
+ 4ee:	cf 92       	push	r12
+ 4f0:	df 92       	push	r13
+ 4f2:	ef 92       	push	r14
+ 4f4:	ff 92       	push	r15
+ 4f6:	1f 93       	push	r17
+ 4f8:	df 93       	push	r29
+ 4fa:	cf 93       	push	r28
+ 4fc:	cd b7       	in	r28, 0x3d	; 61
+ 4fe:	de b7       	in	r29, 0x3e	; 62
+ 500:	2c 97       	sbiw	r28, 0x0c	; 12
+ 502:	0f b6       	in	r0, 0x3f	; 63
+ 504:	f8 94       	cli
+ 506:	de bf       	out	0x3e, r29	; 62
+ 508:	0f be       	out	0x3f, r0	; 63
+ 50a:	cd bf       	out	0x3d, r28	; 61
+ 50c:	81 e0       	ldi	r24, 0x01	; 1
+ 50e:	dc df       	rcall	.-72     	; 0x4c8 <rfm70_bank>
+ 510:	7f e8       	ldi	r23, 0x8F	; 143
+ 512:	e7 2e       	mov	r14, r23
+ 514:	70 e0       	ldi	r23, 0x00	; 0
+ 516:	f7 2e       	mov	r15, r23
+ 518:	10 e0       	ldi	r17, 0x00	; 0
+ 51a:	6e 01       	movw	r12, r28
+ 51c:	08 94       	sec
+ 51e:	c1 1c       	adc	r12, r1
+ 520:	d1 1c       	adc	r13, r1
+ 522:	f7 01       	movw	r30, r14
+ 524:	81 91       	ld	r24, Z+
+ 526:	91 91       	ld	r25, Z+
+ 528:	a1 91       	ld	r26, Z+
+ 52a:	b1 91       	ld	r27, Z+
+ 52c:	7f 01       	movw	r14, r30
+ 52e:	89 83       	std	Y+1, r24	; 0x01
+ 530:	29 2f       	mov	r18, r25
+ 532:	3a 2f       	mov	r19, r26
+ 534:	4b 2f       	mov	r20, r27
+ 536:	55 27       	eor	r21, r21
+ 538:	2a 83       	std	Y+2, r18	; 0x02
+ 53a:	9d 01       	movw	r18, r26
+ 53c:	44 27       	eor	r20, r20
+ 53e:	55 27       	eor	r21, r21
+ 540:	2b 83       	std	Y+3, r18	; 0x03
+ 542:	8b 2f       	mov	r24, r27
+ 544:	99 27       	eor	r25, r25
+ 546:	aa 27       	eor	r26, r26
+ 548:	bb 27       	eor	r27, r27
+ 54a:	8c 83       	std	Y+4, r24	; 0x04
+ 54c:	81 2f       	mov	r24, r17
+ 54e:	b6 01       	movw	r22, r12
+ 550:	44 e0       	ldi	r20, 0x04	; 4
+ 552:	9a dd       	rcall	.-1228   	; 0x88 <rfm70_buffer_write>
+ 554:	1f 5f       	subi	r17, 0xFF	; 255
+ 556:	19 30       	cpi	r17, 0x09	; 9
+ 558:	21 f7       	brne	.-56     	; 0x522 <rfm70_init_bank1+0x34>
+ 55a:	63 eb       	ldi	r22, 0xB3	; 179
+ 55c:	e6 2e       	mov	r14, r22
+ 55e:	60 e0       	ldi	r22, 0x00	; 0
+ 560:	f6 2e       	mov	r15, r22
+ 562:	f7 01       	movw	r30, r14
+ 564:	40 81       	ld	r20, Z
+ 566:	51 81       	ldd	r21, Z+1	; 0x01
+ 568:	62 81       	ldd	r22, Z+2	; 0x02
+ 56a:	73 81       	ldd	r23, Z+3	; 0x03
+ 56c:	f6 01       	movw	r30, r12
+ 56e:	28 e1       	ldi	r18, 0x18	; 24
+ 570:	30 e0       	ldi	r19, 0x00	; 0
+ 572:	db 01       	movw	r26, r22
+ 574:	ca 01       	movw	r24, r20
+ 576:	02 2e       	mov	r0, r18
+ 578:	04 c0       	rjmp	.+8      	; 0x582 <rfm70_init_bank1+0x94>
+ 57a:	b6 95       	lsr	r27
+ 57c:	a7 95       	ror	r26
+ 57e:	97 95       	ror	r25
+ 580:	87 95       	ror	r24
+ 582:	0a 94       	dec	r0
+ 584:	d2 f7       	brpl	.-12     	; 0x57a <rfm70_init_bank1+0x8c>
+ 586:	81 93       	st	Z+, r24
+ 588:	28 50       	subi	r18, 0x08	; 8
+ 58a:	30 40       	sbci	r19, 0x00	; 0
+ 58c:	8f ef       	ldi	r24, 0xFF	; 255
+ 58e:	28 3f       	cpi	r18, 0xF8	; 248
+ 590:	38 07       	cpc	r19, r24
+ 592:	79 f7       	brne	.-34     	; 0x572 <rfm70_init_bank1+0x84>
+ 594:	81 2f       	mov	r24, r17
+ 596:	b6 01       	movw	r22, r12
+ 598:	44 e0       	ldi	r20, 0x04	; 4
+ 59a:	76 dd       	rcall	.-1300   	; 0x88 <rfm70_buffer_write>
+ 59c:	1f 5f       	subi	r17, 0xFF	; 255
+ 59e:	e4 e0       	ldi	r30, 0x04	; 4
+ 5a0:	f0 e0       	ldi	r31, 0x00	; 0
+ 5a2:	ee 0e       	add	r14, r30
+ 5a4:	ff 1e       	adc	r15, r31
+ 5a6:	1e 30       	cpi	r17, 0x0E	; 14
+ 5a8:	e1 f6       	brne	.-72     	; 0x562 <rfm70_init_bank1+0x74>
+ 5aa:	8e e0       	ldi	r24, 0x0E	; 14
+ 5ac:	67 ec       	ldi	r22, 0xC7	; 199
+ 5ae:	70 e0       	ldi	r23, 0x00	; 0
+ 5b0:	4b e0       	ldi	r20, 0x0B	; 11
+ 5b2:	6a dd       	rcall	.-1324   	; 0x88 <rfm70_buffer_write>
+ 5b4:	8e e9       	ldi	r24, 0x9E	; 158
+ 5b6:	8a 83       	std	Y+2, r24	; 0x02
+ 5b8:	86 e8       	ldi	r24, 0x86	; 134
+ 5ba:	8b 83       	std	Y+3, r24	; 0x03
+ 5bc:	8b e0       	ldi	r24, 0x0B	; 11
+ 5be:	8c 83       	std	Y+4, r24	; 0x04
+ 5c0:	8f ef       	ldi	r24, 0xFF	; 255
+ 5c2:	89 83       	std	Y+1, r24	; 0x01
+ 5c4:	84 e0       	ldi	r24, 0x04	; 4
+ 5c6:	b6 01       	movw	r22, r12
+ 5c8:	44 e0       	ldi	r20, 0x04	; 4
+ 5ca:	5e dd       	rcall	.-1348   	; 0x88 <rfm70_buffer_write>
+ 5cc:	89 81       	ldd	r24, Y+1	; 0x01
+ 5ce:	89 7f       	andi	r24, 0xF9	; 249
+ 5d0:	89 83       	std	Y+1, r24	; 0x01
+ 5d2:	84 e0       	ldi	r24, 0x04	; 4
+ 5d4:	b6 01       	movw	r22, r12
+ 5d6:	44 e0       	ldi	r20, 0x04	; 4
+ 5d8:	57 dd       	rcall	.-1362   	; 0x88 <rfm70_buffer_write>
+ 5da:	80 e0       	ldi	r24, 0x00	; 0
+ 5dc:	75 df       	rcall	.-278    	; 0x4c8 <rfm70_bank>
+ 5de:	2c 96       	adiw	r28, 0x0c	; 12
+ 5e0:	0f b6       	in	r0, 0x3f	; 63
+ 5e2:	f8 94       	cli
+ 5e4:	de bf       	out	0x3e, r29	; 62
+ 5e6:	0f be       	out	0x3f, r0	; 63
+ 5e8:	cd bf       	out	0x3d, r28	; 61
+ 5ea:	cf 91       	pop	r28
+ 5ec:	df 91       	pop	r29
+ 5ee:	1f 91       	pop	r17
+ 5f0:	ff 90       	pop	r15
+ 5f2:	ef 90       	pop	r14
+ 5f4:	df 90       	pop	r13
+ 5f6:	cf 90       	pop	r12
+ 5f8:	08 95       	ret
+
+000005fa <rfm70_init>:
+ 5fa:	cf 93       	push	r28
+ 5fc:	df 93       	push	r29
+ 5fe:	80 e0       	ldi	r24, 0x00	; 0
+ 600:	43 d0       	rcall	.+134    	; 0x688 <RFM70_CE>
+ 602:	81 e0       	ldi	r24, 0x01	; 1
+ 604:	3b d0       	rcall	.+118    	; 0x67c <RFM70_CSN>
+ 606:	80 e0       	ldi	r24, 0x00	; 0
+ 608:	4b d0       	rcall	.+150    	; 0x6a0 <RFM70_SCK>
+ 60a:	80 e0       	ldi	r24, 0x00	; 0
+ 60c:	43 d0       	rcall	.+134    	; 0x694 <RFM70_MOSI>
+ 60e:	80 e0       	ldi	r24, 0x00	; 0
+ 610:	5b df       	rcall	.-330    	; 0x4c8 <rfm70_bank>
+ 612:	c6 e7       	ldi	r28, 0x76	; 118
+ 614:	d0 e0       	ldi	r29, 0x00	; 0
+ 616:	88 81       	ld	r24, Y
+ 618:	69 81       	ldd	r22, Y+1	; 0x01
+ 61a:	f5 dd       	rcall	.-1046   	; 0x206 <rfm70_register_write>
+ 61c:	22 96       	adiw	r28, 0x02	; 2
+ 61e:	80 e0       	ldi	r24, 0x00	; 0
+ 620:	ca 38       	cpi	r28, 0x8A	; 138
+ 622:	d8 07       	cpc	r29, r24
+ 624:	c1 f7       	brne	.-16     	; 0x616 <rfm70_init+0x1c>
+ 626:	8a e8       	ldi	r24, 0x8A	; 138
+ 628:	90 e0       	ldi	r25, 0x00	; 0
+ 62a:	70 dd       	rcall	.-1312   	; 0x10c <rfm70_receive_address_p0>
+ 62c:	8a e8       	ldi	r24, 0x8A	; 138
+ 62e:	90 e0       	ldi	r25, 0x00	; 0
+ 630:	68 dd       	rcall	.-1328   	; 0x102 <rfm70_receive_address_p1>
+ 632:	8a e8       	ldi	r24, 0x8A	; 138
+ 634:	90 e0       	ldi	r25, 0x00	; 0
+ 636:	60 dd       	rcall	.-1344   	; 0xf8 <rfm70_transmit_address>
+ 638:	8d e1       	ldi	r24, 0x1D	; 29
+ 63a:	91 dd       	rcall	.-1246   	; 0x15e <rfm70_register_read>
+ 63c:	88 23       	and	r24, r24
+ 63e:	19 f4       	brne	.+6      	; 0x646 <rfm70_init+0x4c>
+ 640:	80 e5       	ldi	r24, 0x50	; 80
+ 642:	63 e7       	ldi	r22, 0x73	; 115
+ 644:	e0 dd       	rcall	.-1088   	; 0x206 <rfm70_register_write>
+ 646:	8c e1       	ldi	r24, 0x1C	; 28
+ 648:	6f e3       	ldi	r22, 0x3F	; 63
+ 64a:	dd dd       	rcall	.-1094   	; 0x206 <rfm70_register_write>
+ 64c:	8d e1       	ldi	r24, 0x1D	; 29
+ 64e:	67 e0       	ldi	r22, 0x07	; 7
+ 650:	da dd       	rcall	.-1100   	; 0x206 <rfm70_register_write>
+ 652:	80 e0       	ldi	r24, 0x00	; 0
+ 654:	60 e0       	ldi	r22, 0x00	; 0
+ 656:	e9 dd       	rcall	.-1070   	; 0x22a <rfm70_channel_payload_size>
+ 658:	81 e0       	ldi	r24, 0x01	; 1
+ 65a:	60 e0       	ldi	r22, 0x00	; 0
+ 65c:	e6 dd       	rcall	.-1076   	; 0x22a <rfm70_channel_payload_size>
+ 65e:	47 df       	rcall	.-370    	; 0x4ee <rfm70_init_bank1>
+ 660:	07 df       	rcall	.-498    	; 0x470 <rfm70_mode_receive>
+ 662:	df 91       	pop	r29
+ 664:	cf 91       	pop	r28
+ 666:	08 95       	ret
+
+00000668 <SPI_MasterInit>:
+ 668:	80 e5       	ldi	r24, 0x50	; 80
+ 66a:	8d b9       	out	0x0d, r24	; 13
+ 66c:	81 e0       	ldi	r24, 0x01	; 1
+ 66e:	8e b9       	out	0x0e, r24	; 14
+ 670:	08 95       	ret
+
+00000672 <SPI_RW>:
+ 672:	8f b9       	out	0x0f, r24	; 15
+ 674:	77 9b       	sbis	0x0e, 7	; 14
+ 676:	fe cf       	rjmp	.-4      	; 0x674 <SPI_RW+0x2>
+ 678:	8f b1       	in	r24, 0x0f	; 15
+ 67a:	08 95       	ret
+
+0000067c <RFM70_CSN>:
+ 67c:	88 23       	and	r24, r24
+ 67e:	11 f0       	breq	.+4      	; 0x684 <RFM70_CSN+0x8>
+ 680:	93 9a       	sbi	0x12, 3	; 18
+ 682:	08 95       	ret
+ 684:	93 98       	cbi	0x12, 3	; 18
+ 686:	08 95       	ret
+
+00000688 <RFM70_CE>:
+ 688:	88 23       	and	r24, r24
+ 68a:	11 f0       	breq	.+4      	; 0x690 <RFM70_CE+0x8>
+ 68c:	94 9a       	sbi	0x12, 4	; 18
+ 68e:	08 95       	ret
+ 690:	94 98       	cbi	0x12, 4	; 18
+ 692:	08 95       	ret
+
+00000694 <RFM70_MOSI>:
+ 694:	88 23       	and	r24, r24
+ 696:	11 f0       	breq	.+4      	; 0x69c <RFM70_MOSI+0x8>
+ 698:	c3 9a       	sbi	0x18, 3	; 24
+ 69a:	08 95       	ret
+ 69c:	c3 98       	cbi	0x18, 3	; 24
+ 69e:	08 95       	ret
+
+000006a0 <RFM70_SCK>:
+ 6a0:	88 23       	and	r24, r24
+ 6a2:	11 f0       	breq	.+4      	; 0x6a8 <RFM70_SCK+0x8>
+ 6a4:	c5 9a       	sbi	0x18, 5	; 24
+ 6a6:	08 95       	ret
+ 6a8:	c5 98       	cbi	0x18, 5	; 24
+ 6aa:	08 95       	ret
+
+000006ac <init_timer1>:
+ 6ac:	08 95       	ret
+
+000006ae <USART_init>:
+ 6ae:	90 bd       	out	0x20, r25	; 32
+ 6b0:	89 b9       	out	0x09, r24	; 9
+ 6b2:	88 e1       	ldi	r24, 0x18	; 24
+ 6b4:	8a b9       	out	0x0a, r24	; 10
+ 6b6:	86 e8       	ldi	r24, 0x86	; 134
+ 6b8:	80 bd       	out	0x20, r24	; 32
+ 6ba:	08 95       	ret
+
+000006bc <USART_SEND>:
+ 6bc:	5d 9b       	sbis	0x0b, 5	; 11
+ 6be:	fe cf       	rjmp	.-4      	; 0x6bc <USART_SEND>
+ 6c0:	8c b9       	out	0x0c, r24	; 12
+ 6c2:	08 95       	ret
+
+000006c4 <debug_send>:
+ 6c4:	dc 01       	movw	r26, r24
+ 6c6:	ec 91       	ld	r30, X
+ 6c8:	ee 23       	and	r30, r30
+ 6ca:	59 f0       	breq	.+22     	; 0x6e2 <debug_send+0x1e>
+ 6cc:	80 e0       	ldi	r24, 0x00	; 0
+ 6ce:	5d 9b       	sbis	0x0b, 5	; 11
+ 6d0:	fe cf       	rjmp	.-4      	; 0x6ce <debug_send+0xa>
+ 6d2:	ec b9       	out	0x0c, r30	; 12
+ 6d4:	8f 5f       	subi	r24, 0xFF	; 255
+ 6d6:	fd 01       	movw	r30, r26
+ 6d8:	e8 0f       	add	r30, r24
+ 6da:	f1 1d       	adc	r31, r1
+ 6dc:	e0 81       	ld	r30, Z
+ 6de:	ee 23       	and	r30, r30
+ 6e0:	b1 f7       	brne	.-20     	; 0x6ce <debug_send+0xa>
+ 6e2:	08 95       	ret
+
+000006e4 <_exit>:
+ 6e4:	f8 94       	cli
+
+000006e6 <__stop_program>:
+ 6e6:	ff cf       	rjmp	.-2      	; 0x6e6 <__stop_program>
