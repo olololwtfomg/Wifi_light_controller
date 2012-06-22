@@ -22,6 +22,7 @@
 				<Option compiler="avrgcc" />
 				<Compiler>
 					<Add option="-Os" />
+					<Add option="-O2" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -40,9 +41,30 @@
 			<Add after="avr-objcopy --no-change-warnings -j .eeprom --change-section-lma .eeprom=0 -O ihex $(TARGET_OUTPUT_FILE) $(TARGET_OUTPUT_FILE).eep.hex" />
 			<Add after='cmd /c &quot;avr-objdump -h -S $(TARGET_OUTPUT_FILE) &gt; $(TARGET_OUTPUT_FILE).lss&quot;' />
 		</ExtraCommands>
+		<Unit filename="USART.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="USART.h" />
+		<Unit filename="bitops.h" />
+		<Unit filename="config.h" />
+		<Unit filename="initialization.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="initialization.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="protocol_low.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rfm70.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rfm70.h" />
+		<Unit filename="spi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="spi.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
