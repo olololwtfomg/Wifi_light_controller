@@ -1,9 +1,11 @@
 #include <avr/io.h>
+#include <avr/sleep.h>
 
 #include "spi.h"
 #include "rfm70.h"
 #include "USART.h"
 #include "initialization.h"
+#include "timers.h"
 
 void init_periph()
 {
@@ -29,5 +31,7 @@ void init_all()
     init_io();
     init_periph();
     USART_init(UBBR_VALUE);
+    init_timer1();
+    set_sleep_mode(SLEEP_MODE_IDLE);
 }
 

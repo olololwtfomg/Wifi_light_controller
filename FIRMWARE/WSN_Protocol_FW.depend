@@ -1,19 +1,23 @@
 # depslib dependency file v1.0
-1340386478 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\main.c
+1340741790 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\main.c
 	<avr/io.h>
+	<avr/interrupt.h>
 	"initialization.h"
 	"USART.h"
+	"timers.h"
 
 1340302553 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\initialization.h
 
 1340037089 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\protocol_low.c
 
-1340273325 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\initialization.c
+1340823209 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\initialization.c
 	<avr/io.h>
+	<avr/sleep.h>
 	"spi.h"
 	"rfm70.h"
 	"USART.h"
 	"initialization.h"
+	"timers.h"
 
 1340197088 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\spi.h
 	<inttypes.h>
@@ -32,10 +36,30 @@
 
 1339166808 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\rfm70.h
 
-1340385455 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.h
-	<inttypes.h>
-
-1340223584 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.c
+1340733944 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.h
 	<avr/io.h>
 	<inttypes.h>
+
+1340733854 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\usart.c
+	<avr/io.h>
+	<inttypes.h>
+	"bitops.h"
+	"USART.h"
+
+1340742963 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\timers.c
+	"timers.h"
+	<avr/io.h>
+	<avr/interrupt.h>
+	<inttypes.h>
+	"bitops.h"
+	"USART.h"
+
+1340834547 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\timers.h
+
+1340834762 source:c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\therm_ds18b20.c
+	"therm_ds18b20.h"
+
+1340830382 c:\users\jaroslav mתטka\work\wireless_sensor_node\firmware\therm_ds18b20.h
+	<avr/io.h>
+	<stdio.h>
 

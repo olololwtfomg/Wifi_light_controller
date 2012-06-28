@@ -27,9 +27,9 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
 			<Add option="-mmcu=atmega8" />
-			<Add option="-DF_CPU=16000000UL" />
+			<Add option="-Wall" />
+			<Add option="-DF_CPU=1000000UL" />
 		</Compiler>
 		<Linker>
 			<Add option="-mmcu=atmega8" />
@@ -65,6 +65,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="spi.h" />
+		<Unit filename="therm_ds18b20.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="therm_ds18b20.h" />
+		<Unit filename="timers.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="timers.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

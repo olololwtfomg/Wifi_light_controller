@@ -9,18 +9,23 @@
  */
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "initialization.h"
 #include "USART.h"
+#include "timers.h"
+
 
 int main(void)
 {
     //initializations
-
-    init_periph();
     init_all();
     debug_send("Welcome to hell!!!\r\n\0");
+    sei();
+    start_timer1();
+    //LED_action(LED2,ON);
     while(1)
-    ;
-
+    {
+        SW_timer_handler();
+    }
     return 0;
 }

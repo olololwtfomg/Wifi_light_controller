@@ -1,5 +1,7 @@
 #include <avr/io.h>
 #include <inttypes.h>
+#include "bitops.h"
+#include "USART.h"
 
 void USART_init(uint16_t ubrr)
 {
@@ -21,5 +23,31 @@ void debug_send(char* str)
     for(strPos=0;str[strPos]!='\0';strPos++)
     {
         USART_SEND(str[strPos]);
+    }
+}
+
+void LED_action(uint8_t led,uint8_t action)
+{
+    // i have no idea why you have to use an intermediary variable to do something usefull with ports
+    uint8_t temp;
+    switch (action)
+    {
+        case ON:
+            temp=PORTC;
+            BitClr(temp,BitMsk(led));
+            PORTC=temp;
+        break;
+        case OFF:
+            temp=PORTC;
+            BitSet(temp,BitMsk(led));
+            PORTC=temp;
+        break;
+        case TOGGLE:
+            temp=PORTC;
+            BitFlp(temp,BitMsk(led));
+            PORTC=temp;
+        break;
+        default:
+        break;
     }
 }
